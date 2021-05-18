@@ -1,0 +1,25 @@
+version: "3.9"
+services:
+#  mariadb:
+#    restart: always
+#    image: cust_mariadb
+#    ports:
+#        - "3306:3306"
+#    volumes:
+#        - mariadb:/home/login/data
+#    networks:
+#        - network_juanrodr
+    nginx:
+        restart: always
+        image: incep_nginx
+        ports:
+            - "443:443"
+            - "9000:9000"
+        networks:
+            - network_juanrodr
+
+volumes:
+  mariadb:
+
+networks:
+    network_juanrodr:
