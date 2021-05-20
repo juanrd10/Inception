@@ -1,25 +1,38 @@
 version: "3.9"
 services:
-#  mariadb:
-#    restart: always
-#    image: cust_mariadb
-#    ports:
-#        - "3306:3306"
-#    volumes:
-#        - mariadb:/home/login/data
-#    networks:
-#        - network_juanrodr
+#    mariadb:
+#       restart: always
+#       image: mariadb_incept
+#       ports:
+#           - "3306:3306"
+#       volumes:
+#           - mariadb:/home/login/data
+#       networks:
+#           - network_juanrodr
+#    wordpress:
+#       restart: always
+#       image: wordpress_incept
+#       ports:
+#           - "3306:3306"
+#           - "9000:9000"
+#       volumes:
+#           - wordpress:/home/login/data
+#       networks:
+#           - network_juanrodr
     nginx:
         restart: always
-        image: incep_nginx
+        image: nginx_incept
+        tty: true
         ports:
             - "443:443"
-            - "9000:9000"
+        volumes:
+            - wordpress:/Users/juanrodr/data
         networks:
             - network_juanrodr
 
 volumes:
-  mariadb:
+    wordpress:
+    mariadb:
 
 networks:
     network_juanrodr:
