@@ -17,5 +17,4 @@ RUN chmod -R 700 /etc/ssl/private && \
 
 EXPOSE 80 443
 
-    CMD service nginx start && \
-        bash
+CMD bash
