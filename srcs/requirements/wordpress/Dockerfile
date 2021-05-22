@@ -16,9 +16,9 @@ EXPOSE 80 443
 
 CMD chmod -R 755 /Users/juanrodr/* ; \
 	service php7.3-fpm start ; \
-	cp -rf wordpress/ /Users/juanrodr/data/wp/ ; \
+	cp -rf wordpress/ /home/juanrodr/data/wp/ ; \
 	rm -rf wordpress ; \
-	mv /wp-config.php /Users/juanrodr/data/wp/wordpress/ ; \
+	mv /wp-config.php /home/juanrodr/data/wp/wordpress/ ; \
 	service nginx start; \
 	bash
 

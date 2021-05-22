@@ -8,7 +8,7 @@ services:
        ports:
            - "3306:3306"
        volumes:
-           - /Users/juanrodriguez/App/Volumes_incep/db:/Users/juanrodr/data/db
+           - /Users/juanrodriguez/App/Volumes_incep/db:/home/juanrodr/data/db
        networks:
            - network_juanrodr
     wordpress:
@@ -19,7 +19,7 @@ services:
        ports:
            - "5000:80"
        volumes:
-           - /Users/juanrodriguez/App/Volumes_incep/wp:/Users/juanrodr/data/wp
+           - /Users/juanrodriguez/App/Volumes_incep/wp:/home/juanrodr/data/wp
        networks:
            - network_juanrodr
 #    nginx:
@@ -31,7 +31,7 @@ services:
 #            - "443:443"
 #            - "80:80"
 #        volumes:
-#            - wordpress:/Users/juanrodr/data
+#            - wordpress:/home/juanrodr/data/wp
 #        networks:
 #            - network_juanrodr
 
