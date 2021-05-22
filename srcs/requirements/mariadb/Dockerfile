@@ -1,11 +1,12 @@
 FROM debian:buster
 
 COPY conf/db_server.sql ./
-COPY conf/db_server.sql ./
+COPY conf/50-server.cnf ./
+COPY conf/init.sh ./dock_import/
 
-RUN apt update && \
+RUN apt -y update && \
 	apt -y install nginx mariadb-server && \
-	apt upgrade
+	apt -y upgrade
 
 CMD service mysql start ; \
 	cp -r -p /var/lib/mysql/ /Users/juanrodr/data/ ; \

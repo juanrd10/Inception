@@ -1,0 +1,1 @@
+alias /var/lib/mysql/ -> /Users/juanrodr/data/db/mysql/

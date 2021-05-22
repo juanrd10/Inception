@@ -3,9 +3,9 @@ FROM debian:buster
 COPY tools/juanrodr_new /etc/nginx/sites-available/juanrodr
 COPY tools/index.html /var/www/juanrodr/
 
-RUN apt update && \
+RUN apt -y update && \
 	apt -y install nginx openssl && \
-	apt upgrade &&\
+	apt -y upgrade &&\
 	rm -rf /etc/nginx/sites-enabled/default && \
 	ln -fs /etc/nginx/sites-available/juanrodr /etc/nginx/sites-enabled/ && \
     chown -R www-data:www-data /var/www/* && \
