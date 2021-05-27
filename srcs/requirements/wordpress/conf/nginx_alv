@@ -1,6 +1,6 @@
 server {
         listen 80;
-        root /home/juanrodr/data/wp/wordpress/;
+        root /var/www/wordpress/;
         index index.php index.html index.htm;
         server_name localhost;
 

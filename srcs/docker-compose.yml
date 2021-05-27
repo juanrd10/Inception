@@ -8,9 +8,8 @@ services:
        ports:
            - "3306:3306"
        volumes:
-           - /Users/juanrodriguez/App/Volumes_incep/db:/home/juanrodr/data/db
-       networks:
-           - network_juanrodr
+           - /home/juanrodr/data/db/:/var/lib/mysql
+
     wordpress:
        restart: always
        image: wordpress_incept
@@ -19,9 +18,8 @@ services:
        ports:
            - "5000:80"
        volumes:
-           - /Users/juanrodriguez/App/Volumes_incep/wp:/home/juanrodr/data/wp
-       networks:
-           - network_juanrodr
+           - /home/juanrodr/data/wp/:/var/www/wordpress/
+
 #    nginx:
 #        restart: always
 #        image: nginx_incept
@@ -34,10 +32,3 @@ services:
 #            - wordpress:/home/juanrodr/data/wp
 #        networks:
 #            - network_juanrodr
-
-volumes:
-    wordpress:
-    mariadb:
-
-networks:
-    network_juanrodr:

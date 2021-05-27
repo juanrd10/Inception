@@ -7,3 +7,6 @@ init:
 
 stop:
 	docker-compose -f ./srcs/docker-compose.yml down
+
+stop_volumes:
+	docker-compose -f ./srcs/docker-compose.yml down --volumes
