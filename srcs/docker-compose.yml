@@ -8,7 +8,7 @@ services:
        ports:
            - "3306:3306"
        volumes:
-           - /home/juanrodr/data/db/:/var/lib/mysql
+           - /Users/juanrodriguez/App/Volumes_incep/db/:/var/lib/mysql
 
     wordpress:
        restart: always
@@ -18,7 +18,7 @@ services:
        ports:
            - "5000:80"
        volumes:
-           - /home/juanrodr/data/wp/:/var/www/wordpress/
+           - /Users/juanrodriguez/App/Volumes_incep/wp/:/var/www/wordpress/
 
 #    nginx:
 #        restart: always
@@ -29,6 +29,6 @@ services:
 #            - "443:443"
 #            - "80:80"
 #        volumes:
-#            - wordpress:/home/juanrodr/data/wp
+#            - /Users/juanrodriguez/App/Volumes_incep/wp/:/var/www/wordpress/
 #        networks:
 #            - network_juanrodr

@@ -1,24 +1,20 @@
 FROM debian:buster
 
-COPY ./conf/nginx_alv /etc/nginx/sites-available/
-COPY ./conf/wp-config.php /
+COPY ./conf/init.sh /resources/
 
 RUN apt -y update && \
-	apt -y install nginx wget php-cgi php-common php-fpm php-pear php-mbstring php-zip php-net-socket php-gd php-xml-util php-gettext php-mysql php-bcmath && \
-	apt -y upgrade ;\
-	wget https://es.wordpress.org/latest-es_ES.tar.gz && \
-	tar xvf latest-es_ES.tar.gz ; \
+	apt -y install wget php7.3-cgi php7.3-common php7.3-fpm php-pear php7.3-mbstring php7.3-zip php-net-socket php7.3-gd php-xml-util php7.3-gettext php7.3-mysql php7.3-bcmath && \
+	apt -y upgrade
+
+RUN wget https://es.wordpress.org/latest-es_ES.tar.gz && \
+	tar -xvzf latest-es_ES.tar.gz ; \
 	rm -rf latest-es_ES.tar.gz ; \
-	rm -rf /etc/nginx/sites-enabled/default && \
-	ln -fs /etc/nginx/sites-available/nginx_alv /etc/nginx/sites-enabled/
+	mv wordpress /resources/
 
-EXPOSE 80 443
+COPY ./conf/wp-config.php /resources/wordpress/
 
-CMD chmod -R 755 /Users/juanrodr/* ; \
-	service php7.3-fpm start ; \
-	cp -rf wordpress/ /var/www/ ; \
-	rm -rf wordpress ; \
-	mv /wp-config.php /home/juanrodr/data/wp/wordpress/ ; \
-	service nginx start; \
-	bash
+RUN chmod 777 /resources/init.sh
+
+ENTRYPOINT /resources/init.sh
+
 

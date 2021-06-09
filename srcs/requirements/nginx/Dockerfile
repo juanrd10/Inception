@@ -5,8 +5,9 @@ COPY tools/index.html /var/www/juanrodr/
 
 RUN apt -y update && \
 	apt -y install nginx openssl && \
-	apt -y upgrade &&\
-	rm -rf /etc/nginx/sites-enabled/default && \
+	apt -y upgrade
+
+RUN rm -rf /etc/nginx/sites-enabled/default && \
 	ln -fs /etc/nginx/sites-available/juanrodr /etc/nginx/sites-enabled/ && \
     chown -R www-data:www-data /var/www/* && \
     chmod -R 755 /var/www/*

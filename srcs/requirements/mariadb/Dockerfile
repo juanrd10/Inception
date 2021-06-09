@@ -1,17 +1,13 @@
 FROM debian:buster
 
 COPY conf/db_server.sql ./dock_import/
-#COPY conf/50-server.cnf ./dock_import/
-#COPY conf/init.sh ./dock_import/
+COPY conf/50-server.cnf ./dock_import/
+COPY ./conf/init.sh /resources/
 
 RUN apt -y update && \
 	apt -y install mariadb-server ; \
 	apt -y upgrade
 
-CMD bash
-	#service mysql start && \
-	#mysql -u root < ./db_server.sql && bash
-	#service mysql start ; \
-	#service mysql stop ; \
-	#rm /etc/mysql/mariadb.conf.d/50-server.cnf ; \
-	#mv -f ./dock_import/50-server.cnf /etc/mysql/mariadb.conf.d/ ; \
+RUN chmod 777 /resources/init.sh
+
+ENTRYPOINT /resources/init.sh
