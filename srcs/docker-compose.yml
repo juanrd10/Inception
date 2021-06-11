@@ -1,34 +1,36 @@
 version: "3.9"
 services:
     mariadb:
-       restart: always
-       image: mariadb_incept
-       container_name: mariadb_incept
-       tty: true
-       ports:
-           - "3306:3306"
-       volumes:
-           - /Users/juanrodriguez/App/Volumes_incep/db/:/var/lib/mysql
+        restart: always
+        image: mariadb_incept
+        container_name: mariadb_incept
+        volumes:
+            - /Users/juanrodriguez/App/Volumes_incep/db/:/var/lib/mysql
+        networks:
+            - incept_net
 
     wordpress:
-       restart: always
-       image: wordpress_incept
-       container_name: wordpress_incept
-       tty: true
-       ports:
-           - "5000:80"
-       volumes:
+        restart: always
+        image: wordpress_incept
+        tty: true
+        container_name: wordpress_incept
+        volumes:
            - /Users/juanrodriguez/App/Volumes_incep/wp/:/var/www/wordpress/
+        networks:
+            - incept_net
 
-#    nginx:
-#        restart: always
-#        image: nginx_incept
-#        container_name: nginx_incept
-#        tty: true
-#        ports:
-#            - "443:443"
-#            - "80:80"
-#        volumes:
-#            - /Users/juanrodriguez/App/Volumes_incep/wp/:/var/www/wordpress/
-#        networks:
-#            - network_juanrodr
+    nginx:
+        restart: always
+        image: nginx_incept
+        container_name: nginx_incept
+        tty: true
+        ports:
+            - "443:443"
+        volumes:
+            - /Users/juanrodriguez/App/Volumes_incep/wp/:/var/www/wordpress/
+        networks:
+            - incept_net
+
+networks:
+    incept_net:
+      driver: bridge
