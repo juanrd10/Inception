@@ -5,29 +5,33 @@ services:
         image: mariadb_incept
         container_name: mariadb_incept
         volumes:
-            - /Users/juanrodriguez/App/Volumes_incep/db/:/var/lib/mysql
+            - /Users/juanrodr/42cursus/Volumes_incep/db/:/var/lib/mysql
         networks:
             - incept_net
 
     wordpress:
         restart: always
+        depends_on:
+            - mariadb
         image: wordpress_incept
         tty: true
         container_name: wordpress_incept
         volumes:
-           - /Users/juanrodriguez/App/Volumes_incep/wp/:/var/www/wordpress/
+           - /Users/juanrodr/42cursus/Volumes_incep/wp/:/var/www/html/wordpress/
         networks:
             - incept_net
 
     nginx:
         restart: always
+        depends_on:
+            - wordpress
         image: nginx_incept
         container_name: nginx_incept
         tty: true
         ports:
             - "443:443"
-        volumes:
-            - /Users/juanrodriguez/App/Volumes_incep/wp/:/var/www/wordpress/
+        #volumes:
+         #   - /Users/juanrodr/42cursus/Volumes_incep/wp/:/var/www/wordpress/
         networks:
             - incept_net
 

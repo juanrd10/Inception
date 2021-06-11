@@ -11,8 +11,8 @@ RUN wget https://es.wordpress.org/latest-es_ES.tar.gz && \
 	rm -rf latest-es_ES.tar.gz ; \
 	mv wordpress /resources/
 
-RUN sed -i 's|listen = /run/php/php7.3-fpm.sock|listen = 9000|g' \
-	/etc/php/7.3/fpm/pool.d/www.conf
+# RUN sed -i 's|listen = /run/php/php7.3-fpm.sock|listen = 9000|g' \
+	# /etc/php/7.3/fpm/pool.d/www.conf
 
 COPY ./conf/wp-config.php /resources/wordpress/
 
@@ -20,5 +20,5 @@ RUN chmod 777 /resources/init.sh
 
 EXPOSE 9000
 
-ENTRYPOINT bash
+ENTRYPOINT bash /resources/init.sh
 

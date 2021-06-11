@@ -6,7 +6,7 @@ server {
         ssl_certificate /etc/ssl/certs/nginx_server.crt;
     	ssl_certificate_key /etc/ssl/private/nginx_server.key;
 
-        root /var/www/wordpress;
+        root /var/www/html/;
 
         index index.php index.html index.htm index.nginx-debian.html;
         server_name localhost;
@@ -15,22 +15,14 @@ server {
                 try_files $uri $uri/ =404;
         }
 
-        location ~* \.php$ {
-            try_files $uri =404;
-#            include snippets/fastcgi-php.conf;
-            fastcgi_pass wordpress_incept:9000;
-
-	    	include /etc/nginx/fastcgi_params;
-            fastcgi_index index.php;
-            fastcgi_param HTTPS on;
-            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-            fastcgi_param SCRIPT_NAME $fastcgi_script_name;
-
-            proxy_set_header X-Real-IP $remote_addr;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_set_header X-Forwarded-Proto https;
-            proxy_set_header X-Forwarded-Port 443;
-            proxy_set_header Host $host;
+        location  ~ \.php$  {
+include snippets/fastcgi-php.conf;
+			fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
+			fastcgi_pass wordpress_incept:9000;
+			fastcgi_index index.php;
+			include fastcgi_params;
+			fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+			fastcgi_param SCRIPT_NAME $fastcgi_script_name;
         }
 
         location ~* \.(jpg|jpeg|gif|css|png|js|ico|html|xml|txt)$ {

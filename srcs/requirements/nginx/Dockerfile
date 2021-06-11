@@ -18,4 +18,4 @@ RUN chmod -R 700 /etc/ssl/private && \
 
 EXPOSE 443
 
-CMD bash
+ENTRYPOINT bash
