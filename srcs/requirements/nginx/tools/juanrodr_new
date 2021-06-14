@@ -6,45 +6,30 @@ server {
         ssl_certificate /etc/ssl/certs/nginx_server.crt;
     	ssl_certificate_key /etc/ssl/private/nginx_server.key;
 
-        root /var/www/html/;
+        server_name localhost;
+
+        root /var/www/html/wordpress/;
 
         index index.php index.html index.htm index.nginx-debian.html;
-        server_name localhost;
 
         location / {
                 try_files $uri $uri/ =404;
         }
 
-        location  ~ \.php$  {
-include snippets/fastcgi-php.conf;
-			fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
-			fastcgi_pass wordpress_incept:9000;
-			fastcgi_index index.php;
-			include fastcgi_params;
-			fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-			fastcgi_param SCRIPT_NAME $fastcgi_script_name;
-        }
+        location ~ [^/]\.php(/|$) {
+            fastcgi_split_path_info ^(.+?\.php)(/.*)$;
+            if (!-f $document_root$fastcgi_script_name) {
+            return 404;
+            }
+        fastcgi_param HTTP_PROXY "";
 
-        location ~* \.(jpg|jpeg|gif|css|png|js|ico|html|xml|txt)$ {
-		    root /var/www/html;
-	    }
+        fastcgi_pass wordpress_incept:9000;
+        fastcgi_index index.php;
+
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param PATH_INFO       $fastcgi_path_info;
+        fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info;
+    }
 }
 
-# Virtual Host configuration for example.com
-#
-# You can move that to a different file under sites-available/ and symlink that
-# to sites-enabled/ to enable it.
-#
-#server {
-#       listen 80;
-#       listen [::]:80;
-#
-#       server_name example.com;
-#
-#       root /var/www/example.com;
-#       index index.html;
-#
-#       location / {
-#               try_files $uri $uri/ =404;
-#       }
-#}
