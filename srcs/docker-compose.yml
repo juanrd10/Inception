@@ -4,6 +4,9 @@ services:
         restart: always
         image: mariadb_incept
         container_name: mariadb_incept
+        environment:
+            - MYSQL_USER=${MYSQL_USER}
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
         volumes:
             - /Users/juanrodriguez/App/Volumes_incep/db/:/var/lib/mysql
         networks:
@@ -27,7 +30,6 @@ services:
             - wordpress_incept
         image: nginx_incept
         container_name: nginx_incept
-        tty: true
         ports:
             - "443:443"
         volumes:

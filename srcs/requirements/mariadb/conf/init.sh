@@ -1,9 +1,11 @@
 chown -R mysql:mysql /var/lib/mysql
 mysql_install_db
 service mysql start
-mysql -u root < "/dock_import/db_server.sql"
+mysql -e "CREATE DATABASE IF NOT EXISTS wordpress"
+mysql -e "CREATE USER '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD'"
+mysql -e "GRANT ALL PRIVILEGES ON *.* TO '$MYSQL_USER'@'%'"
+mysql -e "FLUSH PRIVILEGES"
 service mysql stop
 rm /etc/mysql/mariadb.conf.d/50-server.cnf
 mv -f /dock_import/50-server.cnf /etc/mysql/mariadb.conf.d/
-service mysql start
-tail -f /var/log/mysql/error.log
+exec /usr/bin/mysqld_safe

@@ -1,7 +1,6 @@
 FROM debian:buster
 
-COPY tools/juanrodr_new /etc/nginx/sites-available/juanrodr
-COPY tools/index.html /var/www/juanrodr/
+COPY tools/juanrodr /etc/nginx/sites-available/juanrodr
 
 RUN apt -y update && \
 	apt -y install nginx openssl && \
@@ -18,4 +17,4 @@ RUN chmod -R 700 /etc/ssl/private && \
 
 EXPOSE 443
 
-ENTRYPOINT service nginx start && bash
+CMD ["nginx", "-g", "daemon off;"]
