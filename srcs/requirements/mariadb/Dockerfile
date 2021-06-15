@@ -1,6 +1,5 @@
 FROM debian:buster
 
-COPY conf/db_server.sql ./dock_import/
 COPY conf/50-server.cnf ./dock_import/
 COPY ./conf/init.sh /resources/
 
