@@ -8,6 +8,7 @@ RUN apt -y update && \
 
 RUN wget https://es.wordpress.org/latest-es_ES.tar.gz && \
 	tar -xvzf latest-es_ES.tar.gz ; \
+	apt -y remove wget ; \
 	rm -rf latest-es_ES.tar.gz ; \
 	mv wordpress /resources/
 

@@ -30,6 +30,10 @@ services:
             - wordpress_incept
         image: nginx_incept
         container_name: nginx_incept
+        environment:
+            - MYSQL_USER=${MYSQL_USER}
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+            - MYSQL_HOST=${MYSQL_HOST}
         ports:
             - "443:443"
         volumes:
