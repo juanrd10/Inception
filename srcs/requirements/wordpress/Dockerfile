@@ -18,8 +18,9 @@ RUN sed -i 's|listen.allowed_clients = 127.0.0.1|listen.allowed_clients = 0.0.0.
 COPY ./conf/wp-config.php /resources/wordpress/
 
 RUN chmod 777 /resources/init.sh
+RUN mkdir /var/run/php
 
 EXPOSE 9000
 
-ENTRYPOINT bash /resources/init.sh
+ENTRYPOINT /resources/init.sh
 

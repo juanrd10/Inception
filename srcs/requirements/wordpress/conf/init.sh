@@ -1,7 +1,8 @@
 #!/bin/bash
-
+DIR="/var/www/html/wordpress"
 chown -R www-data:www-data /var/www/html/wordpress
+if [ ! -d "$DIR" ]; then
 mv /resources/wordpress/* /var/www/html/wordpress/
+fi
 rm -rf /resources/wordpress
-service php7.3-fpm start
-bash
+php-fpm7.3 -F
