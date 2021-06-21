@@ -1,0 +1,22 @@
+1. Añadir los dos usuarios de Wordpress:
+	En tu base de datos de WordPress, debe haber dos usuarios. Uno de ellos siendo
+	el administrador. El usuario de administrador no puede contener admin/Admin o
+	administrator/Administrator (por ejemplo, admin, administrator, Administrador,
+	admin-123, y un largo etc).
+
+2. Poner volumenes en el lugar correcto de la maquina virtual:
+	Tus volúmenes deberán estar localizados en el directorio
+	/home/login/data del host utilizando Docker. Por supuesto, deberás
+	reemplazar login por el tuyo.
+
+3. Configurar dominio (hosts)
+	Para simplificar las cosas, deberás configurar tu nombre de dominio para que apunte
+	a tu IP local.
+	El nombre de dominio debe ser login.42.fr. De nuevo, deberás usar tu propio login.
+	Por ejemplo, si tu login es wil, wil.42.fr redirigirá a la IP del sitio web de wil.
+
+4. Redis cache for WordPress
+5. FTP server to var/www/html/wordpress
+6. Static site
+7. Adminer
+8. Servicio extra
