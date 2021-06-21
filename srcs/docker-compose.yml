@@ -1,9 +1,10 @@
 version: "3.9"
 services:
-    mariadb_incept:
+    mariadb:
         restart: always
-        image: mariadb_incept
-        container_name: mariadb_incept
+        image: mariadb
+        build: ./requirements/mariadb
+        container_name: mariadb
         environment:
             - MYSQL_USER=${MYSQL_USER}
             - MYSQL_PASSWORD=${MYSQL_PASSWORD}
@@ -12,23 +13,25 @@ services:
         networks:
             - incept_net
 
-    wordpress_incept:
+    wordpress:
         restart: always
         depends_on:
-            - mariadb_incept
-        image: wordpress_incept
-        container_name: wordpress_incept
+            - mariadb
+        image: wordpress
+        build: ./requirements/wordpress
+        container_name: wordpress
         volumes:
            - /Users/juanrodriguez/App/Volumes_incep/wp/:/var/www/html/wordpress
         networks:
             - incept_net
 
-    nginx_incept:
+    nginx:
         restart: always
         depends_on:
-            - wordpress_incept
-        image: nginx_incept
-        container_name: nginx_incept
+            - wordpress
+        image: nginx
+        build: ./requirements/nginx
+        container_name: nginx
         environment:
             - MYSQL_USER=${MYSQL_USER}
             - MYSQL_PASSWORD=${MYSQL_PASSWORD}

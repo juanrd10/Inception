@@ -12,7 +12,7 @@ RUN wget https://es.wordpress.org/latest-es_ES.tar.gz && \
 	rm -rf latest-es_ES.tar.gz ; \
 	mv wordpress /resources/
 
-RUN sed -i 's|listen = /run/php/php7.3-fpm.sock|listen = wordpress_incept:9000|g' /etc/php/7.3/fpm/pool.d/www.conf
+RUN sed -i 's|listen = /run/php/php7.3-fpm.sock|listen = wordpress:9000|g' /etc/php/7.3/fpm/pool.d/www.conf
 RUN sed -i 's|listen.allowed_clients = 127.0.0.1|listen.allowed_clients = 0.0.0.0|g' /etc/php/7.3/fpm/pool.d/www.conf
 
 COPY ./conf/wp-config.php /resources/wordpress/
