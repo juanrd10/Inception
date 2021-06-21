@@ -28,9 +28,9 @@ server {
 
         include fastcgi_params;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        fastcgi_param MYSQL_HOST mariadb_incept;
-        fastcgi_param MYSQL_USER juanrodr;
-        fastcgi_param MYSQL_PASSWORD juanrodr;
+        fastcgi_param MYSQL_HOST;
+        fastcgi_param MYSQL_USER;
+        fastcgi_param MYSQL_PASSWORD;
         fastcgi_param PATH_INFO       $fastcgi_path_info;
         fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info;
     }
