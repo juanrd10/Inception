@@ -43,6 +43,26 @@ services:
         networks:
             - incept_net
 
+    ftp:
+        restart: always
+        depends_on:
+            - wordpress
+        image: ftp
+        tty: true
+        build: ./requirements/ftp
+        container_name: ftp
+        environment:
+            - FTP_USER=${FTP_USER}
+            - FTP_PASS=${FTP_PASS}
+        ports:
+            - "20:20"
+            - "21:21"
+            - "40001:40001"
+        volumes:
+           - /Users/juanrodriguez/App/Volumes_incep/wp/:/var/www/html/wordpress
+        networks:
+            - incept_net
+
 networks:
     incept_net:
       driver: bridge
