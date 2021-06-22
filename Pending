@@ -16,7 +16,7 @@
 	Por ejemplo, si tu login es wil, wil.42.fr redirigirá a la IP del sitio web de wil.
 
 4. Redis cache for WordPress
-5. FTP server to var/www/html/wordpress
+------------> 5. FTP server to var/www/html/wordpress
 6. Static site
 7. Adminer
 8. Servicio extra
