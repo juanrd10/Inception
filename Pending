@@ -18,5 +18,5 @@
 4. Redis cache for WordPress
 ------------> 5. FTP server to var/www/html/wordpress
 ------------> 6. Static site
-7. Adminer
+------------> 7. Adminer
 8. Servicio extra
