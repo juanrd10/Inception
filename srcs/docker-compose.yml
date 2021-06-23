@@ -46,7 +46,7 @@ services:
     ftp:
         restart: always
         depends_on:
-            - wordpress
+            - nginx
         image: ftp
         tty: true
         build: ./requirements/ftp
@@ -60,6 +60,19 @@ services:
             - "40001:40001"
         volumes:
            - /Users/juanrodriguez/App/Volumes_incep/wp/:/var/www/html/wordpress
+        networks:
+            - incept_net
+
+    adminer:
+        restart: always
+        depends_on:
+            - nginx
+        tty: true
+        image: adminer
+        build: ./requirements/adminer
+        container_name: adminer
+        volumes:
+            - /Users/juanrodriguez/App/Volumes_incep/wp/:/var/www/html/wordpress
         networks:
             - incept_net
 
