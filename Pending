@@ -9,7 +9,7 @@
 	/home/login/data del host utilizando Docker. Por supuesto, deberás
 	reemplazar login por el tuyo.
 
-3. Configurar dominio (hosts)
+------------> 3. Configurar dominio (hosts)
 	Para simplificar las cosas, deberás configurar tu nombre de dominio para que apunte
 	a tu IP local.
 	El nombre de dominio debe ser login.42.fr. De nuevo, deberás usar tu propio login.
@@ -19,4 +19,4 @@
 ------------> 5. FTP server to var/www/html/wordpress
 ------------> 6. Static site
 ------------> 7. Adminer
-8. Servicio extra
+8. Servicio extra -> postfix

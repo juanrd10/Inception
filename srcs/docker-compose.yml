@@ -2,7 +2,7 @@ version: "3.9"
 services:
     mariadb:
         restart: always
-        image: mariadb
+        image: mariadb_i
         build: ./requirements/mariadb
         container_name: mariadb
         environment:
@@ -63,14 +63,27 @@ services:
         networks:
             - incept_net
 
-    adminer:
+    postfix:
         restart: always
         depends_on:
             - nginx
         tty: true
-        image: adminer
-        build: ./requirements/adminer
-        container_name: adminer
+        image: postfix
+        build: ./requirements/postfix
+        container_name: postfix
+        networks:
+            - incept_net
+
+    redis:
+        restart: always
+        depends_on:
+            - nginx
+        tty: true
+        image: redis
+        build: ./requirements/redis
+        container_name: redis
+        ports:
+            - "6379:6379"
         volumes:
             - /Users/juanrodriguez/App/Volumes_incep/wp/:/var/www/html/wordpress
         networks:

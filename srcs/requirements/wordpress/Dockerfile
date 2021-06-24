@@ -7,10 +7,13 @@ RUN apt -y update && \
 	apt -y upgrade
 
 RUN wget https://es.wordpress.org/latest-es_ES.tar.gz && \
+	wget https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1.php && \
 	tar -xvzf latest-es_ES.tar.gz ; \
 	apt -y remove wget ; \
 	rm -rf latest-es_ES.tar.gz ; \
-	mv wordpress /resources/
+	mv wordpress /resources/ && \
+	mkdir /resources/wordpress/adminer/ && \
+	mv adminer-4.8.1.php /resources/wordpress/adminer/
 
 RUN sed -i 's|listen = /run/php/php7.3-fpm.sock|listen = wordpress:9000|g' /etc/php/7.3/fpm/pool.d/www.conf
 RUN sed -i 's|listen.allowed_clients = 127.0.0.1|listen.allowed_clients = 0.0.0.0|g' /etc/php/7.3/fpm/pool.d/www.conf
