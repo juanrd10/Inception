@@ -1,9 +1,7 @@
 FROM debian:buster
 
 RUN apt -y update && \
-	apt -y install redis-server vim && \
+	apt -y install redis-server && \
 	apt -y upgrade
 
-EXPOSE 6379
-
-CMD bash
+CMD service redis-server start && redis-cli MONITOR

@@ -74,21 +74,6 @@ services:
         networks:
             - incept_net
 
-    redis:
-        restart: always
-        depends_on:
-            - nginx
-        tty: true
-        image: redis
-        build: ./requirements/redis
-        container_name: redis
-        ports:
-            - "6379:6379"
-        volumes:
-            - /Users/juanrodriguez/App/Volumes_incep/wp/:/var/www/html/wordpress
-        networks:
-            - incept_net
-
 networks:
     incept_net:
       driver: bridge

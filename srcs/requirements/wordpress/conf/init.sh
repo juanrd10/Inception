@@ -5,4 +5,5 @@ if [ ! -d "$DIR" ]; then
 mv /resources/wordpress/* /var/www/html/wordpress/
 fi
 rm -rf /resources/wordpress
+service redis-server start
 php-fpm7.3 -F
