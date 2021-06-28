@@ -2,7 +2,7 @@ version: "3.9"
 services:
     mariadb:
         restart: always
-        image: mariadb_i
+        image: mariadb
         build: ./requirements/mariadb
         container_name: mariadb
         environment:
@@ -63,14 +63,14 @@ services:
         networks:
             - incept_net
 
-    postfix:
+    redis:
         restart: always
         depends_on:
             - nginx
+        image: redis
         tty: true
-        image: postfix
-        build: ./requirements/postfix
-        container_name: postfix
+        build: ./requirements/redis
+        container_name: redis
         networks:
             - incept_net
 
