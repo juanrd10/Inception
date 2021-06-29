@@ -21,6 +21,7 @@ EXPOSE 443
 CMD sed -i "s|fastcgi_param MYSQL_USER;|fastcgi_param MYSQL_USER ${MYSQL_USER};|g" /etc/nginx/sites-available/juanrodr && \
 sed -i "s|fastcgi_param MYSQL_HOST;|fastcgi_param MYSQL_HOST ${MYSQL_HOST};|g" /etc/nginx/sites-available/juanrodr && \
 sed -i "s|fastcgi_param MYSQL_PASSWORD;|fastcgi_param MYSQL_PASSWORD ${MYSQL_PASSWORD};|g" /etc/nginx/sites-available/juanrodr && \
-mv /index.html /var/www/html && \
+sed -i "s|fastcgi_param WP_CACHE_KEY;|fastcgi_param WP_CACHE_KEY ${WP_CACHE_KEY};|g" /etc/nginx/sites-available/juanrodr && \
+mv /index.html /var/www/html/index.html && \
 nginx -g 'daemon off;'
 #ENTRYPOINT mv /index.html /var/www/html

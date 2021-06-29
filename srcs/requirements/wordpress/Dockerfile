@@ -24,7 +24,5 @@ COPY ./conf/wp-config.php /resources/wordpress/
 RUN chmod 777 /resources/init.sh
 RUN mkdir /var/run/php
 
-EXPOSE 9000
-
 ENTRYPOINT /resources/init.sh
 

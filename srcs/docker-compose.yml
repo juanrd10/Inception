@@ -36,6 +36,7 @@ services:
             - MYSQL_USER=${MYSQL_USER}
             - MYSQL_PASSWORD=${MYSQL_PASSWORD}
             - MYSQL_HOST=${MYSQL_HOST}
+            - WP_CACHE_KEY=${WP_CACHE_KEY}
         ports:
             - "443:443"
         volumes:
@@ -48,7 +49,6 @@ services:
         depends_on:
             - nginx
         image: ftp
-        tty: true
         build: ./requirements/ftp
         container_name: ftp
         environment:
@@ -68,7 +68,6 @@ services:
         depends_on:
             - nginx
         image: redis
-        tty: true
         build: ./requirements/redis
         container_name: redis
         networks:
