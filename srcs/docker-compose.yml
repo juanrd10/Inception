@@ -17,6 +17,7 @@ services:
         restart: always
         depends_on:
             - mariadb
+            - redis
         image: wordpress
         build: ./requirements/wordpress
         container_name: wordpress
@@ -65,8 +66,6 @@ services:
 
     redis:
         restart: always
-        depends_on:
-            - nginx
         image: redis
         build: ./requirements/redis
         container_name: redis

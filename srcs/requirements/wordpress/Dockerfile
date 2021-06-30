@@ -9,10 +9,12 @@ RUN apt -y update && \
 
 RUN wget https://es.wordpress.org/latest-es_ES.tar.gz && \
 	wget https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1.php && \
-	tar -xvzf latest-es_ES.tar.gz ; \
-	apt -y remove wget ; \
-	rm -rf latest-es_ES.tar.gz ; \
-	mv wordpress /resources/ && \
+	tar -xvzf latest-es_ES.tar.gz
+
+RUN apt -y remove wget ; \
+	rm -rf latest-es_ES.tar.gz
+
+RUN mv wordpress /resources/ && \
 	mkdir /resources/wordpress/adminer/ && \
 	mv adminer-4.8.1.php /resources/wordpress/adminer/
 
