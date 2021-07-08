@@ -1,4 +1,4 @@
-DIR="/var/lib/mysql"
+DIR="/var/lib/mysql/wordpress"
 if [ ! -d "$DIR" ]; then
 chown -R mysql:mysql /var/lib/mysql
 mysql_install_db
