@@ -50,11 +50,12 @@ services:
         depends_on:
             - nginx
         image: ftp
-        build: ./requirements/ftp
+        build:
+            context: ./requirements/ftp
+            args:
+                - FTP_USER=${FTP_USER}
+                - FTP_PASS=${FTP_PASS}
         container_name: ftp
-        environment:
-            - FTP_USER=${FTP_USER}
-            - FTP_PASS=${FTP_PASS}
         ports:
             - "20:20"
             - "21:21"
