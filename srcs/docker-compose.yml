@@ -79,11 +79,12 @@ services:
         tty: true
         ports:
             - "25:25"
-        build: ./requirements/postfix
+        build:
+            context: ./requirements/postfix
+            args:
+                - MAIL_USER=${MAIL_USER}
+                - MAIL_PASS=${MAIL_PASS}
         container_name: postfix
-        environment:
-            - MAIL_USER=${MAIL_USER}
-            - MAIL_PASS=${MAIL_PASS}
         networks:
             - incept_net
 

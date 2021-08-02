@@ -1,7 +1,8 @@
 FROM debian:buster
 
+ARG MAIL_USER
+ARG MAIL_PASS
 COPY ./conf/main.cf /conf/
-COPY ./conf/init.sh /conf/
 
 RUN apt -y update && \
 echo "postfix postfix/mailname string example.com" | debconf-set-selections && \
@@ -11,6 +12,10 @@ apt -y install rsyslog mailutils libsasl2-2 ca-certificates libsasl2-modules && 
 apt -y upgrade
 
 RUN rm /etc/postfix/main.cf && mv /conf/main.cf /etc/postfix/ && \
-chmod 777 /conf/init.sh
+echo "[smtp.gmail.com]:587    ${MAIL_USER}:${MAIL_PASS}" > /etc/postfix/sasl_passwd && \
+chmod 0400 /etc/postfix/sasl_passwd && \
+postmap /etc/postfix/sasl_passwd
 
-CMD /conf/init.sh
+CMD service rsyslog restart && \
+service postfix restart && \
+bash
