@@ -31,13 +31,14 @@ services:
         depends_on:
             - wordpress
         image: nginx
-        build: ./requirements/nginx
+        build:
+            context: ./requirements/nginx
+            args:
+                - MYSQL_USER=${MYSQL_USER}
+                - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+                - MYSQL_HOST=${MYSQL_HOST}
+                - WP_CACHE_KEY=${WP_CACHE_KEY}
         container_name: nginx
-        environment:
-            - MYSQL_USER=${MYSQL_USER}
-            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-            - MYSQL_HOST=${MYSQL_HOST}
-            - WP_CACHE_KEY=${WP_CACHE_KEY}
         ports:
             - "443:443"
         volumes:

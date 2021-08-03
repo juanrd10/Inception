@@ -2,6 +2,10 @@ FROM debian:buster
 
 COPY ./conf/juanrodr /etc/nginx/sites-available/juanrodr
 COPY ./conf/index.html /conf/
+ARG MYSQL_USER
+ARG MYSQL_HOST
+ARG MYSQL_PASSWORD
+ARG WP_CACHE_KEY
 
 RUN apt -y update && \
 	apt -y install nginx openssl && \
@@ -18,10 +22,10 @@ RUN chmod -R 700 /etc/ssl/private && \
 
 EXPOSE 443
 
-CMD sed -i "s|fastcgi_param MYSQL_USER;|fastcgi_param MYSQL_USER ${MYSQL_USER};|g" /etc/nginx/sites-available/juanrodr && \
+RUN sed -i "s|fastcgi_param MYSQL_USER;|fastcgi_param MYSQL_USER ${MYSQL_USER};|g" /etc/nginx/sites-available/juanrodr && \
 sed -i "s|fastcgi_param MYSQL_HOST;|fastcgi_param MYSQL_HOST ${MYSQL_HOST};|g" /etc/nginx/sites-available/juanrodr && \
 sed -i "s|fastcgi_param MYSQL_PASSWORD;|fastcgi_param MYSQL_PASSWORD ${MYSQL_PASSWORD};|g" /etc/nginx/sites-available/juanrodr && \
 sed -i "s|fastcgi_param WP_CACHE_KEY;|fastcgi_param WP_CACHE_KEY ${WP_CACHE_KEY};|g" /etc/nginx/sites-available/juanrodr && \
-cp conf/index.html /var/www/html/ && \
-nginx -g 'daemon off;'
-#ENTRYPOINT mv /index.html /var/www/html
+cp conf/index.html /var/www/html/
+
+CMD ["nginx", "-g", "daemon off;"]
