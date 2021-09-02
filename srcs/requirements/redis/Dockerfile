@@ -7,4 +7,4 @@ RUN apt -y update && \
 	apt -y upgrade && \
 	rm /etc/redis/redis.conf && mv /redis.conf /etc/redis/redis.conf
 
-CMD service redis-server start && redis-cli MONITOR
+CMD [ "redis-server", "/etc/redis/redis.conf" ]
