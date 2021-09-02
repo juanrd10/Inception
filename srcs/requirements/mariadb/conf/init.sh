@@ -1,7 +1,7 @@
 DIR="/var/lib/mysql/wordpress"
 if [ ! -d "$DIR" ]; then
-chown -R mysql:mysql /var/lib/mysql
 mysql_install_db
+chown -R mysql:mysql /var/lib/mysql
 service mysql start
 mysql -e "CREATE DATABASE IF NOT EXISTS wordpress"
 mysql -e "CREATE USER '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD'"
