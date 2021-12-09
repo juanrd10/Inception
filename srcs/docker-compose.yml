@@ -2,6 +2,8 @@ version: "3.9"
 services:
     mariadb:
         restart: always
+        depends_on:
+            - redis
         image: mariadb
         build: ./requirements/mariadb
         container_name: mariadb
@@ -52,7 +54,7 @@ services:
             - nginx
         image: ftp
         build:
-            context: ./requirements/ftp
+            context: ./requirements/bonus/ftp
             args:
                 - FTP_USER=${FTP_USER}
                 - FTP_PASS=${FTP_PASS}
@@ -69,7 +71,7 @@ services:
     redis:
         restart: always
         image: redis
-        build: ./requirements/redis
+        build: ./requirements/bonus/redis
         container_name: redis
         networks:
             - incept_net
@@ -81,7 +83,7 @@ services:
         ports:
             - "25:25"
         build:
-            context: ./requirements/postfix
+            context: ./requirements/bonus/postfix
             args:
                 - MAIL_USER=${MAIL_USER}
                 - MAIL_PASS=${MAIL_PASS}
