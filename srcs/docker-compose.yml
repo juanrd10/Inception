@@ -5,11 +5,16 @@ services:
         depends_on:
             - redis
         image: mariadb
-        build: ./requirements/mariadb
+        tty: true
+        build:
+            context: ./requirements/mariadb
+            args:
+                - MYSQL_USER=${MYSQL_USER}
+                - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+                - MYSQL_PASSWORD_ADM=${MYSQL_PASSWORD_ADM}
+                - MYSQL_USER_ADM=${MYSQL_USER_ADM}
+                - MYSQL_ROOT_PASS=${MYSQL_ROOT_PASS}
         container_name: mariadb
-        environment:
-            - MYSQL_USER=${MYSQL_USER}
-            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
         volumes:
             - /Users/juanrodriguez/App/Volumes_incep/db/:/var/lib/mysql
         networks:
