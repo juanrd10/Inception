@@ -1,5 +1,6 @@
 FROM debian:buster
 
+VOLUME [ "/var/lib/mysql" ]
 COPY conf/50-server.cnf ./dock_import/
 COPY conf/create_wordpress.sql ./dock_import/
 COPY conf/create_admin.sql ./dock_import/
@@ -22,12 +23,6 @@ RUN sed -i "s/MYSQL_USER_ADM/${MYSQL_USER_ADM}/g" /dock_import/create_admin.sql
 RUN sed -i "s/MYSQL_PASSWORD_ADM/${MYSQL_PASSWORD_ADM}/g" /dock_import/create_admin.sql
 RUN rm -f /etc/mysql/mariadb.conf.d/50-server.cnf
 RUN	cp /dock_import/50-server.cnf /etc/mysql/mariadb.conf.d/
-RUN mysql_install_db && service mysql start && service mysql stop
-#RUN service mysql start && service mysql stop
+RUN service mysql start && mysql -i < /dock_import/create_wordpress.sql && mysql -i < /dock_import/create_admin.sql
 
-#  && mysql < /dock_import/create_wordpress.sql && mysql < /dock_import/create_admin.sql
-CMD [ "/bin/bash" ]
-
-#CMD "/bin/bash"
-#RUN mysql -u root < ./dock_import/create_wordpress.sql
-#RUN service mysql stop
+CMD [ "mysqld" ]

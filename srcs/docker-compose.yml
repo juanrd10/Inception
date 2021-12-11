@@ -1,9 +1,16 @@
 version: "3.9"
+
+volumes:
+    db_ata:
+      driver: local
+      driver_opts:
+        device: /Users/juanrodriguez/App/Volumes_incep/db/
+        o: bind
+        type: none
+
 services:
     mariadb:
         restart: always
-        depends_on:
-            - redis
         image: mariadb
         tty: true
         build:
@@ -16,7 +23,7 @@ services:
                 - MYSQL_ROOT_PASS=${MYSQL_ROOT_PASS}
         container_name: mariadb
         volumes:
-            - /Users/juanrodriguez/App/Volumes_incep/db/:/var/lib/mysql
+            - db_ata:/var/lib/mysql
         networks:
             - incept_net
 
