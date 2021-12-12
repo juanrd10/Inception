@@ -21,6 +21,9 @@ RUN mkdir -p /var/www/html/wordpress/adminer/ && \
 
 COPY ./conf/wp-config.php /var/www/html/wordpress/
 
+RUN rm -rf /var/www/html/wordpress/wp-content
+COPY ./conf/wp-content /var/www/html/wordpress/wp-content
+
 RUN chown -R www-data:www-data /var/www/html/wordpress
 
 RUN sed -i 's|listen = /run/php/php7.3-fpm.sock|listen = wordpress:9000|g' /etc/php/7.3/fpm/pool.d/www.conf
