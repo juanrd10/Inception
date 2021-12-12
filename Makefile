@@ -19,3 +19,8 @@ info_volumes:
 	@ls /Users/juanrodriguez/App/Volumes_incep/db
 	@echo "\nWORDPRESS LS"
 	@ls /Users/juanrodriguez/App/Volumes_incep/wp
+
+clean:	remove_volumes
+		docker system prune -a
+		docker stop $(docker ps -qa); docker rm $(docker ps -qa); docker rmi -f $(docker images -qa); docker volume rm $(docker volume ls -q); docker network rm $(docker network ls -q) 2>/dev/null
+
