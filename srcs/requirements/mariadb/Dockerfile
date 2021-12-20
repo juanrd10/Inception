@@ -23,6 +23,6 @@ RUN sed -i "s/MYSQL_USER_ADM/${MYSQL_USER_ADM}/g" /dock_import/create_admin.sql
 RUN sed -i "s/MYSQL_PASSWORD_ADM/${MYSQL_PASSWORD_ADM}/g" /dock_import/create_admin.sql
 RUN rm -f /etc/mysql/mariadb.conf.d/50-server.cnf
 RUN	cp /dock_import/50-server.cnf /etc/mysql/mariadb.conf.d/
-RUN service mysql start && mysql -i < /dock_import/create_wordpress.sql && mysql -i < /dock_import/wordpress.sql && mysql -i < /dock_import/create_admin.sql
+RUN service mysql restart && mysql -i < /dock_import/create_wordpress.sql && mysql -i < /dock_import/wordpress.sql && mysql -i < /dock_import/create_admin.sql
 
 CMD [ "mysqld" ]
