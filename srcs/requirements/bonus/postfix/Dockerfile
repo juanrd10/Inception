@@ -17,5 +17,5 @@ chmod 0400 /etc/postfix/sasl_passwd && \
 postmap /etc/postfix/sasl_passwd
 
 CMD service rsyslog restart && \
-service postfix restart && \
-bash
+service postfix stop && cp /etc/resolv.conf /var/spool/postfix/etc/resolv.conf &&\
+postfix start-fg

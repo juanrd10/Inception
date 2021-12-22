@@ -96,7 +96,6 @@ services:
     postfix:
         restart: always
         image: postfix
-        tty: true
         ports:
             - "25:25"
         build:
