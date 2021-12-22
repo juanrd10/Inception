@@ -1,15 +1,34 @@
-version: "3.9"
+version: "3.8"
+
+volumes:
+    db_data:
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: /home/juanrodr/data/db
+    wp_data:
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: /home/juanrodr/data/wp
+ 
 services:
     mariadb:
         restart: always
         image: mariadb
-        build: ./requirements/mariadb
+        build:
+            context: ./requirements/mariadb
+            args:
+                - MYSQL_USER=${MYSQL_USER}
+                - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+                - MYSQL_PASSWORD_ADM=${MYSQL_PASSWORD_ADM}
+                - MYSQL_USER_ADM=${MYSQL_USER_ADM}
+                - MYSQL_ROOT_PASS=${MYSQL_ROOT_PASS}
         container_name: mariadb
-        environment:
-            - MYSQL_USER=${MYSQL_USER}
-            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
         volumes:
-            - /Users/juanrodriguez/App/Volumes_incep/db/:/var/lib/mysql
+          - db_data:/var/lib/mysql
         networks:
             - incept_net
 
@@ -22,7 +41,7 @@ services:
         build: ./requirements/wordpress
         container_name: wordpress
         volumes:
-           - /Users/juanrodriguez/App/Volumes_incep/wp/:/var/www/html/wordpress
+           - wp_data:/var/www/html/wordpress
         networks:
             - incept_net
 
@@ -42,7 +61,7 @@ services:
         ports:
             - "443:443"
         volumes:
-            - /Users/juanrodriguez/App/Volumes_incep/wp/:/var/www/html/wordpress
+            - wp_data:/var/www/html/wordpress
         networks:
             - incept_net
 
@@ -52,7 +71,7 @@ services:
             - nginx
         image: ftp
         build:
-            context: ./requirements/ftp
+            context: ./requirements/bonus/ftp
             args:
                 - FTP_USER=${FTP_USER}
                 - FTP_PASS=${FTP_PASS}
@@ -62,14 +81,14 @@ services:
             - "21:21"
             - "40001:40001"
         volumes:
-           - /Users/juanrodriguez/App/Volumes_incep/wp/:/var/www/html/wordpress
+           - wp_data:/var/www/html/wordpress
         networks:
             - incept_net
 
     redis:
         restart: always
         image: redis
-        build: ./requirements/redis
+        build: ./requirements/bonus/redis
         container_name: redis
         networks:
             - incept_net
@@ -81,7 +100,7 @@ services:
         ports:
             - "25:25"
         build:
-            context: ./requirements/postfix
+            context: ./requirements/bonus/postfix
             args:
                 - MAIL_USER=${MAIL_USER}
                 - MAIL_PASS=${MAIL_PASS}
