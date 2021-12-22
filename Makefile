@@ -4,6 +4,8 @@ init:
 	mkdir -p /home/juanrodr/data/wp
 	docker-compose -f ./srcs/docker-compose.yml up --build -d
 
+bonus: init
+
 stop:
 	docker-compose -f ./srcs/docker-compose.yml down
 
