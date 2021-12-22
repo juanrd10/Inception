@@ -364,9 +364,23 @@ INSERT INTO `wp_usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALU
 (13,	1,	'wp_user_level',	'10'),
 (14,	1,	'dismissed_wp_pointers',	''),
 (15,	1,	'show_welcome_panel',	'1'),
-(16,	1,	'session_tokens',	'a:2:{s:64:\"e29def8e8bc5aaf3e0b2a99bea5dc4563a76e46512b00f876a6937d9067e8f5b\";a:4:{s:10:\"expiration\";i:1639435803;s:2:\"ip\";s:10:\"172.18.0.1\";s:2:\"ua\";s:120:\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36\";s:5:\"login\";i:1639263003;}s:64:\"08a9f2dbb7295e8821a65e1d5aa9b1a3652e74534d09c8d08e431de376e450aa\";a:4:{s:10:\"expiration\";i:1639478998;s:2:\"ip\";s:10:\"172.18.0.1\";s:2:\"ua\";s:120:\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36\";s:5:\"login\";i:1639306198;}}'),
+(16,	1,	'session_tokens',	'a:1:{s:64:\"2a91466e3a859b42c576e56856e07191643f28fe3794f9c092839d5898c5c4db\";a:4:{s:10:\"expiration\";i:1640371846;s:2:\"ip\";s:10:\"172.24.0.1\";s:2:\"ua\";s:68:\"Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101 Firefox/78.0\";s:5:\"login\";i:1640199046;}}'),
 (17,	1,	'wp_dashboard_quick_press_last_post_id',	'4'),
-(18,	1,	'community-events-location',	'a:1:{s:2:\"ip\";s:10:\"172.18.0.0\";}');
+(18,	1,	'community-events-location',	'a:1:{s:2:\"ip\";s:10:\"172.24.0.0\";}'),
+(19,	2,	'nickname',	'pepito'),
+(20,	2,	'first_name',	'Pepe'),
+(21,	2,	'last_name',	''),
+(22,	2,	'description',	''),
+(23,	2,	'rich_editing',	'true'),
+(24,	2,	'syntax_highlighting',	'true'),
+(25,	2,	'comment_shortcuts',	'false'),
+(26,	2,	'admin_color',	'fresh'),
+(27,	2,	'use_ssl',	'0'),
+(28,	2,	'show_admin_bar_front',	'true'),
+(29,	2,	'locale',	''),
+(30,	2,	'wp_capabilities',	'a:1:{s:6:\"author\";b:1;}'),
+(31,	2,	'wp_user_level',	'2'),
+(32,	2,	'dismissed_wp_pointers',	'');
 
 DROP TABLE IF EXISTS `wp_users`;
 CREATE TABLE `wp_users` (
@@ -387,6 +401,7 @@ CREATE TABLE `wp_users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `wp_users` (`ID`, `user_login`, `user_pass`, `user_nicename`, `user_email`, `user_url`, `user_registered`, `user_activation_key`, `user_status`, `display_name`) VALUES
-(1,	'juanrodr',	'$P$BzZyw0eI5PNYsgRMOk44FxzplPTRIS0',	'juanrodr',	'juanrodr@student.42madrid.com',	'https://localhost/wordpress',	'2021-12-11 22:49:31',	'',	0,	'juanrodr');
+(1,	'juanrodr',	'$P$BzZyw0eI5PNYsgRMOk44FxzplPTRIS0',	'juanrodr',	'juanrodr@student.42madrid.com',	'https://localhost/wordpress',	'2021-12-11 22:49:31',	'',	0,	'juanrodr'),
+(2,	'pepito',	'$P$BBihjg81mZskNp1z5CYrFyUlPaOGsV0',	'pepito',	'pepe@juanrodr.42.fr',	'',	'2021-12-22 18:52:50',	'',	0,	'Pepe');
 
--- 2021-12-12 11:03:36
+-- 2021-12-22 18:53:36
