@@ -1,6 +1,19 @@
-version: "3.9"
+version: "3.8"
 
-
+volumes:
+    db_data:
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: /home/juanrodr/data/db
+    wp_data:
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: /home/juanrodr/data/wp
+ 
 services:
     mariadb:
         restart: always
@@ -94,20 +107,6 @@ services:
         container_name: postfix
         networks:
             - incept_net
-
-volumes:
-    db_data:
-        driver: local
-        driver_opts:
-            type: none
-            o: bind
-            device: /Users/juanrodr/App/Volumes_incep/db
-    wp_data:
-        driver: local
-        driver_opts:
-            type: none
-            o: bind
-            device: /Users/juanrodr/App/Volumes_incep/wp
 
 networks:
     incept_net:

@@ -1,7 +1,7 @@
 
 init:
-	mkdir -p /Users/juanrodr/App/Volumes_incep/db
-	mkdir -p /Users/juanrodr/App/Volumes_incep/wp
+	mkdir -p /home/juanrodr/data/db
+	mkdir -p /home/juanrodr/data/wp
 	docker-compose -f ./srcs/docker-compose.yml up --build -d
 
 stop:
@@ -11,16 +11,15 @@ stop_volumes:
 	docker-compose -f ./srcs/docker-compose.yml down --volumes
 
 remove_volumes:
-	rm -rf /Users/juanrodr/App/Volumes_incep/db
-	rm -rf /Users/juanrodr/App/Volumes_incep/wp
-	mkdir -p /Users/juanrodr/App/Volumes_incep/db
-	mkdir -p /Users/juanrodr/App/Volumes_incep/wp
+	rm -rf /home/juanrodr/data
+	mkdir -p /home/juanrodr/data/db
+	mkdir -p /home/juanrodr/data/wp
 
 info_volumes:
 	@echo "DATABASE LS"
-	@ls /Users/juanrodr/App/Volumes_incep/db
+	@ls /home/juanrodr/data/db
 	@echo "\nWORDPRESS LS"
-	@ls /Users/juanrodr/App/Volumes_incep/wp
+	@ls /home/juanrodr/data/wp
 
 clean:	remove_volumes
 		docker system prune -a

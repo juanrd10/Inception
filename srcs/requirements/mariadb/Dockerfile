@@ -1,6 +1,5 @@
 FROM debian:buster
 
-VOLUME [ "/var/lib/mysql" ]
 COPY conf/50-server.cnf ./dock_import/
 COPY conf/create_wordpress.sql ./dock_import/
 COPY conf/wordpress.sql ./dock_import/
@@ -25,4 +24,4 @@ RUN rm -f /etc/mysql/mariadb.conf.d/50-server.cnf
 RUN	cp /dock_import/50-server.cnf /etc/mysql/mariadb.conf.d/
 RUN service mysql restart && mysql -i < /dock_import/create_wordpress.sql && mysql -i < /dock_import/wordpress.sql && mysql -i < /dock_import/create_admin.sql
 
-CMD [ "mysqld" ]
+CMD [ "mysqld_safe" ]

@@ -1,7 +1,5 @@
 FROM debian:buster
 
-VOLUME [ "/var/www/html/wordpress" ]
-
 RUN apt -y update && \
 	apt -y install wget php7.3-cgi php7.3-common php7.3-fpm php-pear php7.3-mbstring php7.3-zip php-net-socket php7.3-gd php-xml-util php7.3-gettext php7.3-mysql php7.3-bcmath && \
 	apt -y install && \
